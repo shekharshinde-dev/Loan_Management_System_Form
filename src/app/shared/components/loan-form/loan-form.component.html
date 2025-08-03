@@ -1,0 +1,85 @@
+<mat-stepper linear>
+    <!-- Step 1 : Personal Details Form -->
+    <mat-step [stepControl]="personalDetailsForm">
+        <form [formGroup]="personalDetailsForm">
+            <ng-template matStepLabel>Personal Details</ng-template>
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name">
+                <mat-error *ngIf="f['name'].hasError('required')">
+                    Name is required
+                </mat-error>
+                <mat-error *ngIf="f['name'].hasError('required')">
+                    "Kindly provide your full name (first and last)."
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+                <mat-error *ngIf="f['email'].hasError('required')">
+                    Email is required
+                </mat-error>
+                <mat-error *ngIf="f['email'].hasError('pattern')">
+                    "Oops! That doesn't look like a valid email. Please use the format {{'name@example.com.'}}"
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Phone</mat-label>
+                <input matInput formControlName="phone">
+                <mat-error *ngIf="f['phone'].hasError('required')">
+                    Phone number is required
+                </mat-error>
+                <mat-error *ngIf="f['phone'].hasError('isValidPhoneNUmber')">
+                    {{f['phone'].errors?.['isValidPhoneNUmber']}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Date of Birth</mat-label>
+                <input matInput formControlName="dob" [matDatepicker]="dobPicker">
+                <mat-datepicker-toggle matIconSuffix [for]="dobPicker"></mat-datepicker-toggle>
+                <mat-datepicker #dobPicker></mat-datepicker>
+                <mat-error *ngIf="f['dob'].hasError('required')">
+                    DOB is required
+                </mat-error>
+                <mat-error *ngIf="f['dob'].hasError('invalidValidDateOfBirth')">
+                    {{f['dob'].errors?.['invalidValidDateOfBirth']}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Gender</mat-label>
+                <mat-select formControlName="gender">
+                    <mat-option value="Male">Male</mat-option>
+                    <mat-option value="Female">Female</mat-option>
+                    <mat-option value="Others">Others</mat-option>
+                </mat-select>
+                <mat-error>
+                    Gender is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Marital Status</mat-label>
+                <mat-select formControlName="maritalStatus">
+                    <mat-option value="Single">Single</mat-option>
+                    <mat-option value="Married">Married</mat-option>
+                    <mat-option value="Divorced">Divorced</mat-option>
+                </mat-select>
+                <mat-error>
+                    Marital is required
+                </mat-error>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperNext type="button">Next</button>
+            </div>
+        </form>
+    </mat-step>
+
+        <!-- Step 2 : document Upload Form -->
+    <mat-step [stepControl]="documentUploadForm">
+        <form [formGroup]="documentUploadForm">
+            <ng-template matStepLabel>Personal Details</ng-template>
+            </form>
+    </mat-step>
+
+</mat-stepper>
+
+{{personalDetailsForm.value | json}}
